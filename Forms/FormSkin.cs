@@ -697,7 +697,7 @@ namespace GenieClient
             }
         }
 
-        private void MyKeyDown(KeyEventArgs e)
+        private void MyKeyDown(object? sender,KeyEventArgs e)
         {
             ((FormMain)MdiParent).InputKeyDown(e);
         }
@@ -792,6 +792,26 @@ namespace GenieClient
         private void RichTextBoxOutput_LinkClicked(object sender, LinkClickedEventArgs e)
         {
             EventLinkClicked?.Invoke(e.LinkText);
+        }
+
+        private void _RichTextBoxOutput_KeyDown(object sender, KeyEventArgs e)
+        {
+            this._RichTextBoxOutput.ComponentRichTextBox_KeyDown(sender, e);
+        }
+
+        private void _RichTextBoxOutput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this._RichTextBoxOutput.ComponentRichTextBox_KeyPress(sender,e);
+        }
+
+        private void _RichTextBoxOutput_MouseUp(object sender, MouseEventArgs e)
+        {
+            this._RichTextBoxOutput.ComponentRichTextBox_MouseUp(sender, e);
+        }
+
+        private void _RichTextBoxOutput_MouseDown(object sender, MouseEventArgs e)
+        {
+            this._RichTextBoxOutput.ComponentRichTextBox_MouseDown(sender, e);
         }
     }
 }

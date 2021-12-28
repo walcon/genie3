@@ -360,6 +360,7 @@ namespace GenieClient
 
         private void AddToBuffer(string sText, Color oColor, Color oBgColor, bool bMono = false, Font oFont = null)
         {
+
             m_oRichTextBuffer.SelectionLength = 0;
             m_oRichTextBuffer.SelectionStart = int.MaxValue;
             int iStart = m_oRichTextBuffer.SelectionStart;
@@ -673,7 +674,10 @@ namespace GenieClient
 
             SelectionStart = int.MaxValue;
             SelectionLength = 0;
-            SelectedRtf = text;
+
+            if (text != "")
+                SelectedRtf = text;
+            
             bool bScroll = true;
             if (iFirstLineVisible + 2 >= m_iEndLine) // +2 extra lines
             {
@@ -776,20 +780,20 @@ namespace GenieClient
             m_bPendingNewLine = false;
         }
 
-        private void ComponentRichTextBox_GotFocus(object sender, EventArgs e)
+        public void ComponentRichTextBox_GotFocus(object sender, EventArgs e)
         {
             m_oParentForm.Focus();
         }
 
         public event EventKeyDownEventHandler EventKeyDown;
 
-        public delegate void EventKeyDownEventHandler(KeyEventArgs e);
+        public delegate void EventKeyDownEventHandler(object? sender, KeyEventArgs e);
 
-        private void ComponentRichTextBox_KeyDown(object sender, KeyEventArgs e)
+        public void ComponentRichTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(e.KeyData == Keys.PageUp | e.KeyData == Keys.PageDown))
             {
-                EventKeyDown?.Invoke(e);
+                EventKeyDown?.Invoke(this,e);
                 e.Handled = true;
             }
         }
@@ -798,7 +802,7 @@ namespace GenieClient
 
         public delegate void EventKeyPressEventHandler(KeyPressEventArgs e);
 
-        private void ComponentRichTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        public void ComponentRichTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             EventKeyPress?.Invoke(e);
             e.Handled = true;
@@ -806,12 +810,12 @@ namespace GenieClient
 
         private bool m_bMouseDown = false;
 
-        private void ComponentRichTextBox_MouseDown(object sender, MouseEventArgs e)
+        public void ComponentRichTextBox_MouseDown(object sender, MouseEventArgs e)
         {
             m_bMouseDown = true;
         }
 
-        private void ComponentRichTextBox_MouseUp(object sender, MouseEventArgs e)
+        public void ComponentRichTextBox_MouseUp(object sender, MouseEventArgs e)
         {
             try
             {
