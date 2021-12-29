@@ -64,7 +64,7 @@ namespace GenieClient.Genie
         public bool PluginsEnabled = true;
         public Hashtable PluginVerifiedKeyList = new Hashtable();
         public Hashtable PluginPremiumKeyList = new Hashtable();
-        private Log _Log;
+        private Log _Log = new Log();
 
         public Log Log
         {
