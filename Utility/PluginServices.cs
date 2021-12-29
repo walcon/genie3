@@ -37,7 +37,9 @@ namespace GenieClient
                     objDLL = Assembly.Load(readAllBytes);
                     ExamineAssembly(objDLL, strDLLs[intIndex], strInterface, Conversions.ToString(strKey), Plugins);
                 }
+                #pragma warning disable CS0168
                 catch (Exception e)
+                #pragma warning restore CS0168
                 {
                     // Error loading DLL, we don't need to do anything special
                 }
@@ -137,7 +139,9 @@ namespace GenieClient
                 // Create and return class instance
                 objPlugin = objDLL.CreateInstance(Plugin.ClassName);
             }
+            #pragma warning disable CS0168
             catch (Exception e)
+            #pragma warning restore CS0168
             {
                 return null;
             }

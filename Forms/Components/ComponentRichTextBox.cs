@@ -126,7 +126,7 @@ namespace GenieClient
         /* TODO ERROR: Skipped EndRegionDirectiveTrivia */
         /* TODO ERROR: Skipped EndRegionDirectiveTrivia */
         private Win32Utility Win32Utility = new Win32Utility();
-        private int m_iMaxScroll = int.MinValue;
+        // private int m_iMaxScroll = int.MinValue;
         private int m_iEndLine = int.MinValue;
         private FormSkin m_oParentForm;
         private RichTextBox m_oRichTextBuffer = new RichTextBox();
@@ -828,7 +828,9 @@ namespace GenieClient
                     FlushBuffer();
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
             }
             // Ignore
