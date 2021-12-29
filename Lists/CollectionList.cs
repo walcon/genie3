@@ -29,6 +29,9 @@ namespace GenieClient.Genie.Collections
             {
                 if (m_RWLock.IsWriterLockHeld)
                     return false;
+
+                if (m_RWLock.IsReaderLockHeld) return true;
+
                 m_RWLock.AcquireReaderLock(millisecondsTimeout);
                 return true;
             }

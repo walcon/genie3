@@ -454,7 +454,7 @@ namespace GenieClient.Genie
                                         break;
                                     }
                             }
-
+                            
                             ConfigChanged?.Invoke(ConfigFieldUpdated.Autolog);
                             break;
                         }
