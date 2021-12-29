@@ -183,7 +183,7 @@ namespace GenieClient.Mapper
 
         private ArrayList m_Movement = new ArrayList();
         private bool m_RoomUpdated = false;
-        private bool m_AddDupeRooms = true;
+        // private bool m_AddDupeRooms = true;
         private bool m_RisingMists = false;
 
         public void VariableChanged(string var)
@@ -274,7 +274,9 @@ namespace GenieClient.Mapper
                     }
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 EchoText("[" + Name + "] Invalid maps in genie map directory.");
             }
