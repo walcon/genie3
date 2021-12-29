@@ -16,7 +16,9 @@ namespace GenieClient.Genie.Collections
                 m_oRWLock.AcquireWriterLock(millisecondsTimeout);
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -29,7 +31,9 @@ namespace GenieClient.Genie.Collections
                 m_oRWLock.AcquireReaderLock(millisecondsTimeout);
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -41,7 +45,9 @@ namespace GenieClient.Genie.Collections
             {
                 return m_oRWLock.UpgradeToWriterLock(millisecondsTimeout);
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return default;
             }
@@ -54,7 +60,9 @@ namespace GenieClient.Genie.Collections
                 m_oRWLock.DowngradeFromWriterLock(ref cookie);
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return default;
             }
@@ -67,7 +75,9 @@ namespace GenieClient.Genie.Collections
                 m_oRWLock.ReleaseWriterLock();
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -80,7 +90,9 @@ namespace GenieClient.Genie.Collections
                 m_oRWLock.ReleaseReaderLock();
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }

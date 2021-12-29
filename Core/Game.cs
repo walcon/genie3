@@ -24,9 +24,6 @@ namespace GenieClient.Genie
         {
             m_oSocket = new Connection();
             m_oGlobals = cl;
-            // m_oBanned.Add("A92A093E4352F6B0B9FDAAF23B1E600CC1C4546A6206E1F8CF0EA59DFF324AB9", True)
-            // m_oBanned.Add("DB7D3A74709A222515C6B8FAFEA9A6EE9E7593BA91733D0776AFD87A4B14B4E8", True)
-            // m_oBanned.Add("D9198B4AB9EC86B4E2EC55596881A07AF8FCAC57C6BB6086463A6990E3015EFC", True)
         }
 
         public event EventPrintTextEventHandler EventPrintText;
@@ -193,7 +190,7 @@ namespace GenieClient.Genie
         private bool m_bUpdatingRoom = false;
         private bool m_bUpdateRoomOnStreamEnd = false;
         private string m_sRoomTitle = string.Empty;
-        private Match m_oRegMatch;
+        // private Match m_oRegMatch;
         private Hashtable m_oIndicatorHash = new Hashtable();
         private Hashtable m_oCompassHash = new Hashtable();
         private WindowTarget m_oTargetWindow = WindowTarget.Main;
@@ -764,7 +761,9 @@ namespace GenieClient.Genie
             {
                 oDocument.LoadXml("<data>" + sXML + "</data>");
             }
+            #pragma warning disable CS0168
             catch (XmlException ex)
+            #pragma warning restore CS0168
             {
                 /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
                 return sReturn;
@@ -995,7 +994,7 @@ namespace GenieClient.Genie
                                     string argtext4 = "Listing characters:";
                                     PrintError(argtext4);
                                     string strUserKey = string.Empty;
-                                    bool blnFoundMatch = false;
+                                    // bool blnFoundMatch = false;
                                     for (int i = 5, loopTo = oData.Count - 1; i <= loopTo; i++)
                                     {
                                         if (i % 2 == 0)
@@ -2813,7 +2812,7 @@ namespace GenieClient.Genie
                         m_oGlobals.Log?.LogText(Constants.vbNewLine, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
                     }
 
-                    //m_oGlobals.Log.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
+                    m_oGlobals.Log.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
                 }
             }
 

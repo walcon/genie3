@@ -359,7 +359,7 @@ namespace GenieClient
                 }
             }
 
-            public new bool Add(string sTrigger, string sAction, int iFileId, int iFileRow, bool bIgnoreCase = false, bool bIsEvalAction = false, bool bIsInstant = false)
+            public bool Add(string sTrigger, string sAction, int iFileId, int iFileRow, bool bIgnoreCase = false, bool bIsEvalAction = false, bool bIsInstant = false)
             {
                 if (sTrigger.StartsWith("e/") == true)
                 {
@@ -429,7 +429,7 @@ namespace GenieClient
                 return true;
             }
 
-            public new void Remove(string sText)
+            public void Remove(string sText)
             {
                 if (sText.StartsWith("e/") == true)
                 {
@@ -507,7 +507,7 @@ namespace GenieClient
                 }
             }
 
-            public new int Add(string sText, string sLabel, bool bIsRegExp = false, bool bIgnoreCase = false)
+            public int Add(string sText, string sLabel, bool bIsRegExp = false, bool bIgnoreCase = false)
             {
                 if (bIsRegExp)
                 {
@@ -533,7 +533,7 @@ namespace GenieClient
 
         public class ClassVariableList : SortedList
         {
-            public new void Add(string key, string value)
+            public void Add(string key, string value)
             {
                 if (base.ContainsKey(key) == true)
                 {
@@ -648,7 +648,7 @@ namespace GenieClient
         private DateTime m_oPauseEnd;
         private bool m_bWaitForStringResume = true;
         private bool m_bWaitForStringIsRegExp = false;
-        private bool m_bWaitForStringIgnoreCase = false;
+        // private bool m_bWaitForStringIgnoreCase = false;
         private string m_sWaitForStringText = string.Empty;
         private Regex m_oWaitForRegex = null;
         private bool m_bWaitForMove = true;
@@ -1974,7 +1974,6 @@ namespace GenieClient
             if (m_oActions.ContainsKey(sKey) == false)
             {
                 throw new Exception("Invalid Key in ParseAction()");
-                return;
             }
 
             int iFileId = ((ClassActionList.Action)m_oActions[sKey]).iFileId;
@@ -2834,7 +2833,9 @@ namespace GenieClient
                             m_oTimerStart = DateTime.Parse(Utility.GetArgumentString(sText));
                             m_oLocalVarList.Add("t", "@timer@"); // set automatically "start" timer
                         }
+                        #pragma warning disable CS0168
                         catch (Exception ex)
+                        #pragma warning restore CS0168
                         {
                             PrintError("Invalid datetime format in TIMER SETSTART command: " + Utility.GetArgumentString(sText), iFileId, iFileRow);
                             AbortOnScriptError();
@@ -3059,7 +3060,9 @@ namespace GenieClient
             {
                 return Utility.MathCalc(dValue, sExpression);
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 PrintError("Invalid MATH expression: " + sExpression, iFileId, iFileRow);
                 AbortOnScriptError();
@@ -3131,7 +3134,7 @@ namespace GenieClient
             if (sText.Trim().Length > 0)
             {
                 m_bWaitForStringIsRegExp = bIsRegExp;
-                m_bWaitForStringIgnoreCase = false;
+                // m_bWaitForStringIgnoreCase = false;
                 if (m_bWaitForStringIsRegExp == true)
                 {
                     if (sText.StartsWith("/") == true)
@@ -3141,7 +3144,7 @@ namespace GenieClient
 
                     if (sText.EndsWith("/i") == true)
                     {
-                        m_bWaitForStringIgnoreCase = true;
+                        // m_bWaitForStringIgnoreCase = true;
                         sText = sText.Substring(0, sText.Length - 2);
                     }
                     else if (sText.EndsWith("/") == true)
@@ -3338,13 +3341,17 @@ namespace GenieClient
                     return false;
                 }
             }
+            #pragma warning disable CS0168
             catch (FileNotFoundException ex)
+            #pragma warning restore CS0168
             {
                 PrintError("File not found: " + sFriendlyName, iFileId: argiFileId, iFileRow: argiFileRow);
                 AbortScript();
                 return false;
             }
+            #pragma warning disable CS0168
             catch (FileLoadException ex)
+            #pragma warning restore CS0168
             {
                 PrintError("File load exception: " + sFriendlyName, iFileId: argiFileId, iFileRow: argiFileRow);
                 AbortScript();
@@ -3451,13 +3458,17 @@ namespace GenieClient
                     return false;
                 }
             }
+            #pragma warning disable CS0168
             catch (FileNotFoundException ex)
+            #pragma warning restore CS0168
             {
                 PrintError("File not found: " + sFriendlyName, iFileId: argiFileId, iFileRow: argiFileRow);
                 AbortScript();
                 return false;
             }
+            #pragma warning disable CS0168
             catch (FileLoadException ex)
+            #pragma warning restore CS0168
             {
                 PrintError("File load exception: " + sFriendlyName, iFileId: argiFileId, iFileRow: argiFileRow);
                 AbortScript();
@@ -3565,9 +3576,7 @@ namespace GenieClient
                                 {
                                     return false;
                                 }
-
                                 continue;
-                                break;
                             }
 
                         case ScriptFunctions.pluginscript:
@@ -3577,9 +3586,7 @@ namespace GenieClient
                                 {
                                     AppendString(strScript);
                                 }
-
                                 continue;
-                                break;
                             }
 
                         case ScriptFunctions.iffunc:
@@ -3731,7 +3738,6 @@ namespace GenieClient
 
                                     continue;
                                 }
-
                                 break;
                             }
 
@@ -3742,9 +3748,7 @@ namespace GenieClient
                                     PrintError("Unknown script command: " + sRow, iFileId, iFileRow);
                                     return false;
                                 }
-
                                 continue;
-                                break;
                             }
                     }
                 }

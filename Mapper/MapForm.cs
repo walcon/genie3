@@ -304,7 +304,9 @@ namespace GenieClient.Mapper
 
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -567,7 +569,9 @@ namespace GenieClient.Mapper
 
                 return sReturn;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return string.Empty;
             }
@@ -838,7 +842,9 @@ namespace GenieClient.Mapper
 
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -965,7 +971,9 @@ namespace GenieClient.Mapper
                 xw.Close();
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
