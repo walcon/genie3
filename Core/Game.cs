@@ -900,6 +900,7 @@ namespace GenieClient.Genie
                 case ConnectStates.ConnectedGameHandshake:
                     {
                         m_oConnectState = ConnectStates.ConnectedGame;
+                        Thread.Sleep(1000);
                         m_oSocket.Send(Constants.vbLf + Constants.vbLf);
                         break;
                     }
