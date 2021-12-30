@@ -43,8 +43,6 @@ namespace GenieClient.Genie
             }
         }
 
-        // Why is there a configchanged that is the same name as the eventhandler inside Config - but inside Global
-
         public event ConfigChangedEventHandler ConfigChanged;
 
         public delegate void ConfigChangedEventHandler(Config.ConfigFieldUpdated oField);

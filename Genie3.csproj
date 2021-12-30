@@ -313,11 +313,6 @@
     <Compile Include="Properties\MyNamespace.Dynamic.Designer.cs" />
     <Compile Include="Properties\MyNamespace.Static.1.Designer.cs" />
     <Compile Include="Properties\Settings.Designer.cs" />
-    <Compile Include="Properties\Settings1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="RegexOptions.cs" />
     <Compile Include="Script\JavaScript.cs" />
     <Compile Include="Script\LUAScript.cs" />

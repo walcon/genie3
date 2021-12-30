@@ -697,7 +697,7 @@ namespace GenieClient
             }
         }
 
-        private void MyKeyDown(object? sender,KeyEventArgs e)
+        private void MyKeyDown(KeyEventArgs e)
         {
             ((FormMain)MdiParent).InputKeyDown(e);
         }

@@ -360,7 +360,6 @@ namespace GenieClient
 
         private void AddToBuffer(string sText, Color oColor, Color oBgColor, bool bMono = false, Font oFont = null)
         {
-
             m_oRichTextBuffer.SelectionLength = 0;
             m_oRichTextBuffer.SelectionStart = int.MaxValue;
             int iStart = m_oRichTextBuffer.SelectionStart;
@@ -787,13 +786,13 @@ namespace GenieClient
 
         public event EventKeyDownEventHandler EventKeyDown;
 
-        public delegate void EventKeyDownEventHandler(object? sender, KeyEventArgs e);
+        public delegate void EventKeyDownEventHandler(KeyEventArgs e);
 
         public void ComponentRichTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(e.KeyData == Keys.PageUp | e.KeyData == Keys.PageDown))
             {
-                EventKeyDown?.Invoke(this,e);
+                EventKeyDown?.Invoke(e);
                 e.Handled = true;
             }
         }
