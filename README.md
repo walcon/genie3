@@ -197,7 +197,7 @@ Project Link: [https://github.com/GenieClient/genie3](https://github.com/GenieCl
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [https://github.com/walcon](Conny - Origional Developer)
+* [https://github.com/walcon] Conny - Origional Developer)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
