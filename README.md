@@ -6,4 +6,4 @@ Download executable here:
 https://github.com/walcon/genie3/releases/download/compiled/Genie3Release.zip
 Please note, this version is untested and may contain bugs. Use at your own risk!
 
-[Latest exe here](/bin/Release/Genie.exe)
+[Latest exe here](https://github.com/GenieClient/genie3/raw/main/bin/Release/Genie.exe)
