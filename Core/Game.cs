@@ -448,6 +448,10 @@ namespace GenieClient.Genie
                 sShowText = "[" + sOrigin + "]: " + sShowText;
             }
 
+            // Maybe not needed
+            if (sOrigin.Equals("") && sShowText.Equals(""))
+                sShowText = sText;
+
             if (bHideOutput == false)
             {
                 Color color;
