@@ -144,7 +144,7 @@ namespace GenieClient.Mapper
 
         private Point3D GetOffset()
         {
-            return new Point3D((int)(this.Width / 2 * m_Scale), (int)(this.Height / 2 * m_Scale));
+            return new Point3D((int)(this.Width / 2 * m_Scale), (int)(0));
         }
 
         public Point ConvertPoint(Point3D oPoint, int iOffset = 0)
@@ -2055,7 +2055,7 @@ namespace GenieClient.Mapper
                 r.Width *= m_Scale;
                 r.Height += 5 * m_Scale;
                 r.Width += 5 * m_Scale;
-                if (PanelBase.Width > r.Width & PanelBase.Height > r.Height)
+                if (PanelBase.Width > r.Width && PanelBase.Height > r.Height)
                 {
                     if (PanelMap.Dock == DockStyle.None)
                     {
@@ -2077,10 +2077,10 @@ namespace GenieClient.Mapper
                         PanelMap.Top = 0;
                         PanelMap.Left = 0;
                     }
-
-                    PanelMap.Width = r.Width;
-                    PanelMap.Height = r.Height;
                 }
+
+                PanelMap.Width = r.Width + (int)(r.Width / 2);
+                PanelMap.Height = r.Height + (int)(r.Height / 2);
             }
             else if (PanelMap.Dock == DockStyle.None)
             {
