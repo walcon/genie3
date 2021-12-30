@@ -204,6 +204,7 @@ namespace GenieClient.Genie
         public enum WindowTarget
         {
             Unknown,
+            Combat,
             Main,
             Inv,
             Familiar,
@@ -1318,6 +1319,11 @@ namespace GenieClient.Genie
                             var switchExpr3 = GetAttributeData(oXmlNode, argstrAttributeName13);
                             switch (switchExpr3)
                             {
+                                case "combat":
+                                    {
+                                        m_oTargetWindow = WindowTarget.Combat;
+                                        break;
+                                    }
                                 case "main":
                                     {
                                         m_oTargetWindow = WindowTarget.Main;
@@ -2647,6 +2653,12 @@ namespace GenieClient.Genie
                         break;
                     }
 
+                case WindowTarget.Combat:
+                    {
+                        sTargetWindowString = "combat";
+                        break;
+                    }
+
                 case WindowTarget.Familiar:
                     {
                         sTargetWindowString = "familiar";
@@ -2804,7 +2816,7 @@ namespace GenieClient.Genie
                 }
             }
 
-            if (targetwindow == WindowTarget.Main | targetwindow == WindowTarget.Thoughts)
+            if (targetwindow == WindowTarget.Main | targetwindow == WindowTarget.Thoughts | targetwindow == WindowTarget.Combat)
             {
                 if (m_oGlobals.Config.bAutoLog == true)
                 {
