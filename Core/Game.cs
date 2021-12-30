@@ -2826,7 +2826,7 @@ namespace GenieClient.Genie
                     //    m_oGlobals.Log?.LogText(text + System.Environment.NewLine, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
                     //}
 
-                    m_oGlobals.Log.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
+               //     m_oGlobals.Log.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
                 }
             }
 
