@@ -2316,7 +2316,11 @@ namespace GenieClient.Genie
                                         }
 
                                     case "goto":
+                                    case "go":
+                                    case "g":
                                     case "walk":
+                                    case "walkto":
+                                    case "path":
                                         {
                                             EventMapperCommand?.Invoke(sRow.Replace("#", "#mapper "));
                                             break;
@@ -2324,6 +2328,7 @@ namespace GenieClient.Genie
 
                                     case "mapper":
                                     case "map":
+                                    case "m":
                                         {
                                             EventMapperCommand?.Invoke(sRow);
                                             break;
