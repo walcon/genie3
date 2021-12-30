@@ -142,6 +142,7 @@ namespace GenieClient
                 if (_m_oGlobals != null)
                 {
                     GenieError.EventGenieError -= HandleGenieException;
+                    _m_oGlobals.Config.ConfigChanged -= Config_ConfigChanged;
                     _m_oGlobals.ConfigChanged -= Config_ConfigChanged;
                 }
 
@@ -149,7 +150,9 @@ namespace GenieClient
                 if (_m_oGlobals != null)
                 {
                     GenieError.EventGenieError += HandleGenieException;
+                    _m_oGlobals.Config.ConfigChanged += Config_ConfigChanged;
                     _m_oGlobals.ConfigChanged += Config_ConfigChanged;
+                   
                 }
             }
         }

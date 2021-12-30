@@ -2820,10 +2820,11 @@ namespace GenieClient.Genie
             {
                 if (m_oGlobals.Config.bAutoLog == true)
                 {
-                    if (m_bLastRowWasPrompt == true)
-                    {
-                        m_oGlobals.Log?.LogText(Constants.vbNewLine, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
-                    }
+                    m_oGlobals.Log?.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
+                    //if (m_bLastRowWasPrompt == true)
+                    //{
+                    //    m_oGlobals.Log?.LogText(text + System.Environment.NewLine, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
+                    //}
 
                     m_oGlobals.Log.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
                 }
