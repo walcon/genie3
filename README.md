@@ -139,7 +139,7 @@ Microsoft .NET Framework 4.8 Runtime [https://dotnet.microsoft.com/en-us/downloa
 Never get lost again!  Auto Mapper lets you create, edit, and share maps of the world.  With one click, you can breeze from place to place, and see the worlds of Elanthia in a whole new way.
 A Helpful Video can be found here: [https://player.vimeo.com/video/44971762]
 
-_For more discussion, join the discord group [Documentation](https://example.com)_
+_For more discussion, join the discord group [DiscordGroup](https://discord.gg/MtmzE2w)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
