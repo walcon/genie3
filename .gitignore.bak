@@ -354,4 +354,6 @@ obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 obj/Debug/Genie3.csproj.AssemblyReference.cache
 .vs/Genie3/v17/.suo
 *.cache
+.vs/Genie3/v17/.suo
 bin/Plugins.dll
+obj/Debug/Genie3.csproj.AssemblyReference.cache

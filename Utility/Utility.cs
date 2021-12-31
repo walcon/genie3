@@ -67,10 +67,18 @@ namespace GenieClient
                 z = (x ^ y) + 32;
                 Debug.WriteLine(z + ":" + ((Strings.Asc(Strings.Mid(sKey, i, 1)) ^ Strings.Asc(Strings.Mid(sText, i, 1)) - 32) + 32));
                 var midTmp = Conversions.ToString(Strings.Chr((Strings.Asc(Strings.Mid(sKey, i, 1)) ^ Strings.Asc(Strings.Mid(sText, i, 1)) - 32) + 32));
+            //    var midTmp = Conversions.ToString(Chr((Strings.Asc(Strings.Mid(sKey, i, 1)) ^ Strings.Asc(Strings.Mid(sText, i, 1)) - 32) + 32));
                 StringType.MidStmtStr(ref sText, i, 1, midTmp);
             }
 
             return sText;
+        }
+
+        public static string Chr(int p_intByte)
+        {
+            byte[] bytBuffer = BitConverter.GetBytes(p_intByte);
+
+            return System.Text.Encoding.Unicode.GetString(bytBuffer);
         }
 
         // Nya keyserver rutiner:
