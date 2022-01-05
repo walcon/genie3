@@ -63,8 +63,11 @@ namespace GenieClient
                     m_ItemChanged = true;
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
+
                 TextBoxMonoFont.Text = "";
                 TextBoxMonoFont.Tag = null;
                 Interaction.MsgBox("Invalid font selected. Please select a TrueType font.", MsgBoxStyle.Critical);
@@ -87,7 +90,9 @@ namespace GenieClient
                     m_ItemChanged = true;
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 TextBoxInputFont.Text = "";
                 TextBoxInputFont.Tag = null;
