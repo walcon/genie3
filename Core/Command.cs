@@ -370,6 +370,7 @@ namespace GenieClient.Genie
                                             Connect(oArgs);
                                             break;
                                         }
+
                                     case "lc":
                                     case "lconnect":
                                         {
@@ -386,6 +387,7 @@ namespace GenieClient.Genie
                                             Connect(oArgs, true);
                                             break;
                                         }
+
                                     case "ls":
                                     case "lichsettings":
                                         {

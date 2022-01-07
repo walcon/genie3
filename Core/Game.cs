@@ -372,9 +372,8 @@ namespace GenieClient.Genie
             }
         }
 
-        public void Connect(string sGenieKey, string sAccountName, string sPassword, string sCharacter, string sGame, bool isLich = false)
+        public void Connect(string sGenieKey, string sAccountName, string sPassword, string sCharacter, string sGame)
         {
-            this.IsLich = isLich;
             m_sAccountName = sAccountName;
             m_sAccountPassword = sPassword;
             m_sAccountCharacter = sCharacter;

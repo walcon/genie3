@@ -5125,6 +5125,7 @@ namespace GenieClient
 
         private void ReconnectToGame(bool isLich = false)
         {
+            m_oGame.IsLich = isLich;
             try
             {
                 if (m_oGame.AccountName.Length > 0)
@@ -5135,7 +5136,7 @@ namespace GenieClient
                     string argsPassword = m_oGame.AccountPassword;
                     string argsCharacter = m_oGame.AccountCharacter;
                     string argsGame = m_oGame.AccountGame;
-                    m_oGame.Connect(m_sGenieKey, argsAccountName, argsPassword, argsCharacter, argsGame, isLich);
+                    m_oGame.Connect(m_sGenieKey, argsAccountName, argsPassword, argsCharacter, argsGame);
                 }
             }
             /* TODO ERROR: Skipped IfDirectiveTrivia */
@@ -5148,11 +5149,12 @@ namespace GenieClient
 
         private void ConnectToGame(string sAccountName, string sPassword, string sCharacter, string sGame, bool isLich = false)
         {
+            m_oGame.IsLich = isLich;
             try
             {
                 if (sPassword.Length > 0)
                 {
-                    m_oGame.Connect(m_sGenieKey, sAccountName, sPassword, sCharacter, sGame, isLich);
+                    m_oGame.Connect(m_sGenieKey, sAccountName, sPassword, sCharacter, sGame);
                 }
                 else
                 {
@@ -6904,7 +6906,7 @@ namespace GenieClient
                 {
                     if (sAccount.Length > 0 & sPassword.Length > 0)
                     {
-                        ConnectToGame(sAccount, sPassword, sCharacter, sGame);
+                        ConnectToGame(sAccount, sPassword, sCharacter, sGame, m_oGame.IsLich);
                     }
                     else
                     {
