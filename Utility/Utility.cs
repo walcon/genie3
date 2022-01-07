@@ -16,7 +16,7 @@ namespace GenieClient
             return "[" + Strings.FormatDateTime(DateAndTime.Now, DateFormat.ShortTime) + "]";
         }
 
-        public static bool ExecuteProcess(string sFileName, string sArguments)
+        public static bool ExecuteProcess(string sFileName, string sArguments, bool closeProcess = true)
         {
             var myProcess = new Process();
             var myProcessStartInfo = new ProcessStartInfo(sFileName);
@@ -29,12 +29,13 @@ namespace GenieClient
             myProcess.Start();
             var myStreamReader = myProcess.StandardOutput;
             // Read the standard output of the spawned process.
-            while (myProcess.HasExited == false)
-                // If myStreamReader.Peek() > -1 Then
-                // RTBOutput.AppendText(myStreamReader.ReadToEnd() & vbCrLf)
-                // End If
-                Thread.Sleep(10);
-            myProcess.Close();
+            if (closeProcess)
+            {
+                while (myProcess.HasExited == false)
+                    Thread.Sleep(10);
+                myProcess.Close();
+            }
+
             return default;
         }
 

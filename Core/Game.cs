@@ -199,6 +199,7 @@ namespace GenieClient.Genie
         private ConnectStates m_oConnectState;
         private object m_oThreadLock = new object(); // Thread safety
         private bool m_bFamiliarLineParse = false;
+        public bool IsLich = false;
 
         /* TODO ERROR: Skipped RegionDirectiveTrivia */
         public enum WindowTarget
@@ -371,8 +372,9 @@ namespace GenieClient.Genie
             }
         }
 
-        public void Connect(string sGenieKey, string sAccountName, string sPassword, string sCharacter, string sGame)
+        public void Connect(string sGenieKey, string sAccountName, string sPassword, string sCharacter, string sGame, bool isLich = false)
         {
+            this.IsLich = isLich;
             m_sAccountName = sAccountName;
             m_sAccountPassword = sPassword;
             m_sAccountCharacter = sCharacter;
@@ -394,6 +396,8 @@ namespace GenieClient.Genie
                 m_oSocket.Disconnect();
             }
         }
+
+
 
         public void SendText(string sText, bool bUserInput = false, string sOrigin = "")
         {
@@ -766,9 +770,9 @@ namespace GenieClient.Genie
             {
                 oDocument.LoadXml("<data>" + sXML + "</data>");
             }
-            #pragma warning disable CS0168
+#pragma warning disable CS0168
             catch (XmlException ex)
-            #pragma warning restore CS0168
+#pragma warning restore CS0168
             {
                 /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
                 return sReturn;
@@ -1084,17 +1088,19 @@ namespace GenieClient.Genie
                                     {
                                         if (strRow.IndexOf("GAMEHOST=") > -1)
                                         {
-                                            m_sConnectHost = strRow.Substring(9);
+                                            m_sConnectHost = IsLich ? m_oGlobals.Config.LichServer : strRow.Substring(9);
                                         }
                                         else if (strRow.IndexOf("GAMEPORT=") > -1)
                                         {
-                                            m_sConnectPort = int.Parse(strRow.Substring(9));
+                                            m_sConnectPort = IsLich ? m_oGlobals.Config.LichPort : int.Parse(strRow.Substring(9));
                                         }
                                         else if (strRow.IndexOf("KEY=") > -1)
                                         {
                                             m_sConnectKey = strRow.Substring(4);
                                         }
                                     }
+
+
 
                                     if (m_sConnectKey.Length > 0)
                                     {
@@ -2830,7 +2836,7 @@ namespace GenieClient.Genie
                     //    m_oGlobals.Log?.LogText(text + System.Environment.NewLine, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
                     //}
 
-               //     m_oGlobals.Log.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
+                    //     m_oGlobals.Log.LogText(text, Conversions.ToString(m_oGlobals.VariableList["charactername"]), Conversions.ToString(m_oGlobals.VariableList["game"]));
                 }
             }
 
