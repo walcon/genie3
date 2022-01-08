@@ -2812,15 +2812,24 @@ namespace GenieClient.Genie
             {
                 if (text.Trim().Length == 0)
                 {
-                    if (m_bLastRowWasBlank == true | m_bLastRowWasPrompt == true)
+                    if (m_bLastRowWasBlank == true || m_bLastRowWasPrompt == true)
                     {
                         return;
                     }
 
                     m_bLastRowWasBlank = true;
                 }
+                else if (Regex.IsMatch(text, @"^\w*\> ?$"))
+                {
+                    if (m_bLastRowWasBlank)
+                    {
+                        return;
+                    }
+                    m_bLastRowWasPrompt = true;
+                }
                 else
                 {
+                    m_bLastRowWasPrompt = false;
                     m_bLastRowWasBlank = false;
                 }
             }
