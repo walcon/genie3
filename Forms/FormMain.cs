@@ -1171,7 +1171,8 @@ namespace GenieClient
             {
                 if (m_oGlobals.MacroList.Contains(e.KeyData) == true)
                 {
-                    string argsText = m_oCommand.ParseCommand(((Genie.Macros.Macro)m_oGlobals.MacroList[e.KeyData]).sAction, true, true);
+                    m_oCommand.ParseCommand(((Genie.Macros.Macro)m_oGlobals.MacroList[e.KeyData]).sAction, true, true);
+                    string argsText = "";
                     var argoColor = Color.Transparent;
                     var argoBgColor = Color.Transparent;
                     Genie.Game.WindowTarget argoTargetWindow = Genie.Game.WindowTarget.Main;
@@ -3340,17 +3341,14 @@ namespace GenieClient
             {
                 m_CommandSent = true;
                 string argsText = "";
-              
-             
-                //argsText += Constants.vbNewLine;
-                var argoColor = Color.Transparent;
+                              var argoColor = Color.Transparent;
                 var argoBgColor = Color.Transparent;
                 Genie.Game.WindowTarget argoTargetWindow = Genie.Game.WindowTarget.Main;
                 string argsTargetWindow = "";
                 m_oCommand.ParseCommand(sText, true, true);
                 AddText(argsText, argoColor, argoBgColor, oTargetWindow: argoTargetWindow, sTargetWindow: argsTargetWindow);
                 
-                //  AddText(argsText, argoColor, argoBgColor, oTargetWindow: argoTargetWindow, sTargetWindow: argsTargetWindow); // For some stupid reason we need this. Probably because EndUpdate is fired before we are ready in the other thread.
+               
                 EndUpdate();
             }
             /* TODO ERROR: Skipped IfDirectiveTrivia */
