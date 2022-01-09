@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Genie3": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

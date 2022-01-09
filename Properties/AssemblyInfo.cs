@@ -10,9 +10,9 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Genie Client 3")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("genieclient.com")]
+[assembly: AssemblyCompany("github.com/GenieClient")]
 [assembly: AssemblyProduct("Genie Client 3")]
-[assembly: AssemblyCopyright("Copyright © 2003-2012 Conny Wallström")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: ComVisible(false)]
 
@@ -30,5 +30,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")> 
 
-[assembly: AssemblyVersion("4.0.*")]
-[assembly: AssemblyFileVersion("4.0.0.0")]
+[assembly: AssemblyVersion("3.6.1.2")]
+[assembly: AssemblyFileVersion("3.6.1.2")]

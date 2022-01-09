@@ -103,7 +103,9 @@ namespace GenieClient
                     {
                         File.Move(m_oGlobals.Config.ConfigDir + @"\config.xml", m_sConfigFile);
                     }
+                    #pragma warning disable CS0168
                     catch (Exception ex)
+                    #pragma warning restore CS0168
                     {
                         Interaction.MsgBox("Error: Unable to move config.xml to default.layout");
                     }
@@ -140,6 +142,7 @@ namespace GenieClient
                 if (_m_oGlobals != null)
                 {
                     GenieError.EventGenieError -= HandleGenieException;
+                    _m_oGlobals.Config.ConfigChanged -= Config_ConfigChanged;
                     _m_oGlobals.ConfigChanged -= Config_ConfigChanged;
                 }
 
@@ -147,7 +150,9 @@ namespace GenieClient
                 if (_m_oGlobals != null)
                 {
                     GenieError.EventGenieError += HandleGenieException;
+                    _m_oGlobals.Config.ConfigChanged += Config_ConfigChanged;
                     _m_oGlobals.ConfigChanged += Config_ConfigChanged;
+                   
                 }
             }
         }
@@ -422,8 +427,8 @@ namespace GenieClient
         private FormSkin m_oOutputLog;
         private ArrayList m_oFormList = new ArrayList();
         private string m_sConfigFile = string.Empty;
-        private string m_sUpdateVersion = string.Empty;
-        private bool m_bIsUpdateMajor = false;
+        // private string m_sUpdateVersion = string.Empty;
+        // private bool m_bIsUpdateMajor = false;
         private string m_sGenieKey = string.Empty;
         private System.Text.RegularExpressions.Match m_oRegMatch;
 
@@ -552,7 +557,9 @@ namespace GenieClient
                 {
                     filename = Path.Combine(sPluginPath, filename);
                 }
+                #pragma warning disable CS0168
                 catch (ArgumentException ex)
+                #pragma warning restore CS0168
                 {
                     AppendText("Plugin not found: " + filename + Constants.vbNewLine);
                     return;
@@ -2393,7 +2400,9 @@ namespace GenieClient
                     RemoveExitedScripts();
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
             } // Don't care. Close
         }
@@ -2968,7 +2977,9 @@ namespace GenieClient
                     AddScripts();
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
             } // Don't care
         }
@@ -3329,13 +3340,15 @@ namespace GenieClient
             try
             {
                 m_CommandSent = true;
-                m_oCommand.ParseCommand(sText, true, true);
                 string argsText = "";
-                var argoColor = Color.Transparent;
+                              var argoColor = Color.Transparent;
                 var argoBgColor = Color.Transparent;
                 Genie.Game.WindowTarget argoTargetWindow = Genie.Game.WindowTarget.Main;
                 string argsTargetWindow = "";
-                AddText(argsText, argoColor, argoBgColor, oTargetWindow: argoTargetWindow, sTargetWindow: argsTargetWindow); // For some stupid reason we need this. Probably because EndUpdate is fired before we are ready in the other thread.
+                m_oCommand.ParseCommand(sText, true, true);
+                AddText(argsText, argoColor, argoBgColor, oTargetWindow: argoTargetWindow, sTargetWindow: argsTargetWindow);
+                
+               
                 EndUpdate();
             }
             /* TODO ERROR: Skipped IfDirectiveTrivia */
@@ -3750,7 +3763,9 @@ namespace GenieClient
                 {
                     m_oCommand.ParseCommand(sAction, true, false, "Trigger");
                 }
+                #pragma warning disable CS0168
                 catch (Exception ex)
+                #pragma warning restore CS0168
                 {
                     string argsText = "Trigger action failed: " + sAction;
                     PrintError(argsText);
@@ -4143,6 +4158,8 @@ namespace GenieClient
 
         private void AddText(string sText, Color oColor, Color oBgColor, FormSkin oTargetWindow, bool bNoCache = true, bool bMono = false, bool bPrompt = false, bool bInput = false)
         {
+            bPrompt = false; 
+
             if (IsDisposed)
             {
                 return;
@@ -5104,8 +5121,9 @@ namespace GenieClient
             }
         }
 
-        private void ReconnectToGame()
+        private void ReconnectToGame(bool isLich = false)
         {
+            m_oGame.IsLich = isLich;
             try
             {
                 if (m_oGame.AccountName.Length > 0)
@@ -5127,8 +5145,9 @@ namespace GenieClient
             }
         }
 
-        private void ConnectToGame(string sAccountName, string sPassword, string sCharacter, string sGame)
+        private void ConnectToGame(string sAccountName, string sPassword, string sCharacter, string sGame, bool isLich = false)
         {
+            m_oGame.IsLich = isLich;
             try
             {
                 if (sPassword.Length > 0)
@@ -5395,8 +5414,7 @@ namespace GenieClient
             {
                 if (InvokeRequired == true)
                 {
-                    var parameters = new[] { iTime };
-                    Invoke(new SetRoundtimeDelegate(SetRoundTime), parameters);
+                    Invoke(new SetRoundtimeDelegate(SetRoundTime), iTime);
                 }
                 else
                 {
@@ -6886,7 +6904,7 @@ namespace GenieClient
                 {
                     if (sAccount.Length > 0 & sPassword.Length > 0)
                     {
-                        ConnectToGame(sAccount, sPassword, sCharacter, sGame);
+                        ConnectToGame(sAccount, sPassword, sCharacter, sGame, m_oGame.IsLich);
                     }
                     else
                     {
