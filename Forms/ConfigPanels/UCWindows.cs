@@ -372,7 +372,9 @@ namespace GenieClient
                     m_ItemChanged = true;
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 TextBoxFont.Text = "";
                 TextBoxFont.Tag = null;

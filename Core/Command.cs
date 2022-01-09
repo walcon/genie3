@@ -3,6 +3,7 @@ using System.Collections;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -14,11 +15,11 @@ namespace GenieClient.Genie
     {
         public event EventReconnectEventHandler EventReconnect;
 
-        public delegate void EventReconnectEventHandler();
+        public delegate void EventReconnectEventHandler(bool isLich);
 
         public event EventConnectEventHandler EventConnect;
 
-        public delegate void EventConnectEventHandler(string sAccountName, string sPassword, string sCharacter, string sGame);
+        public delegate void EventConnectEventHandler(string sAccountName, string sPassword, string sCharacter, string sGame, bool isLich);
 
         public event EventDisconnectEventHandler EventDisconnect;
 
@@ -60,7 +61,7 @@ namespace GenieClient.Genie
 
         public delegate void EventStatusBarEventHandler(string sText, int iIndex);
 
-        public event EventCopyDataEventHandler EventCopyData;
+        // public event EventCopyDataEventHandler EventCopyData;
 
         public delegate void EventCopyDataEventHandler(string sDestination, string sData);
 
@@ -366,35 +367,41 @@ namespace GenieClient.Genie
 
                                     case "connect":
                                         {
-                                            if (oArgs.Count == 1)
-                                            {
-                                                // EchoText("Reconnect Command Received" & vbNewLine)
-                                                EventReconnect?.Invoke();
-                                            }
-                                            else if (oArgs.Count == 5)
-                                            {
-                                                // EchoText("Connect Command Received" & vbNewLine);
-                                                var arg1 = oGlobals.ParseGlobalVars(oArgs[1].ToString());
-                                                var arg2 = oGlobals.ParseGlobalVars(oArgs[2].ToString());
-                                                var arg3 = oGlobals.ParseGlobalVars(oArgs[3].ToString());
-                                                var arg4 = oGlobals.ParseGlobalVars(oArgs[4].ToString());
-
-                                                EventConnect?.Invoke(arg1, arg2, arg3, arg4);
-                                            }
-                                            else if (oArgs.Count == 2)
-                                            {
-                                                var arg1 = oGlobals.ParseGlobalVars(oArgs[1].ToString());
-                                                var argEmpty = "";
-                                                EventConnect?.Invoke(arg1, argEmpty, argEmpty, argEmpty);
-                                            }
-                                            else
-                                            {
-                                                EchoText("Invalid number of arguments in #connect command. Syntax: #connect account password character game" + Constants.vbNewLine);
-                                            }
-
+                                            Connect(oArgs);
                                             break;
                                         }
 
+                                    case "lc":
+                                    case "lconnect":
+                                        {
+                                            EchoText("Starting Lich Server\n");
+                                            string lichLaunch = $"/C {oGlobals.Config.RubyPath} {oGlobals.Config.LichPath} {oGlobals.Config.LichArguments}";
+                                            
+                                            Utility.ExecuteProcess(oGlobals.Config.CmdPath, lichLaunch, false);
+                                            int count = 0;
+                                            while (count < oGlobals.Config.LichStartPause) 
+                                            {
+                                                Thread.Sleep(1000);
+                                                count++;
+                                            }
+                                            Connect(oArgs, true);
+                                            break;
+                                        }
+
+                                    case "ls":
+                                    case "lichsettings":
+                                        {
+                                            EchoText($"\nLich Settings\n");
+                                            EchoText($"----------------------------------------------------\n");
+                                            EchoText($"Cmd Path:\t\t {oGlobals.Config.CmdPath}\n");
+                                            EchoText($"Ruby Path:\t\t {oGlobals.Config.RubyPath}\n");
+                                            EchoText($"Lich Path:\t\t {oGlobals.Config.LichPath}\n");
+                                            EchoText($"Lich Arguments:\t {oGlobals.Config.LichArguments}\n");
+                                            EchoText($"Lich Start Pause:\t {oGlobals.Config.LichStartPause}\n");
+                                            EchoText($"Lich Server:\t\t {oGlobals.Config.LichServer}\n");
+                                            EchoText($"Lich Port:\t\t {oGlobals.Config.LichPort}\n\n");
+                                            break;
+                                        }
                                     case "disconnect":
                                         {
                                             EventDisconnect?.Invoke();
@@ -992,7 +999,9 @@ namespace GenieClient.Genie
                                                     string argsVariable3 = "$" + oArgs[1].ToString();
                                                     VariableChanged(argsVariable3);
                                                 }
+                                                #pragma warning disable CS0168
                                                 catch (Exception ex)
+                                                #pragma warning restore CS0168
                                                 {
                                                     EchoText("Invalid #math expression: " + Utility.ArrayToString(oArgs, 1));
                                                 }
@@ -2314,7 +2323,11 @@ namespace GenieClient.Genie
                                         }
 
                                     case "goto":
+                                    case "go":
+                                    case "g":
                                     case "walk":
+                                    case "walkto":
+                                    case "path":
                                         {
                                             EventMapperCommand?.Invoke(sRow.Replace("#", "#mapper "));
                                             break;
@@ -2322,6 +2335,7 @@ namespace GenieClient.Genie
 
                                     case "mapper":
                                     case "map":
+                                    case "m":
                                         {
                                             EventMapperCommand?.Invoke(sRow);
                                             break;
@@ -2426,6 +2440,37 @@ namespace GenieClient.Genie
 
             /* TODO ERROR: Skipped IfDirectiveTrivia *//* TODO ERROR: Skipped DisabledTextTrivia *//* TODO ERROR: Skipped EndIfDirectiveTrivia */
             return sResult;
+        }
+
+
+        private void Connect(ArrayList args, bool isLich = false)
+        {
+            if (args.Count == 1)
+            {
+                // EchoText("Reconnect Command Received" & vbNewLine)
+                EventReconnect?.Invoke(isLich);
+            }
+            else if (args.Count == 5)
+            {
+                // EchoText("Connect Command Received" & vbNewLine);
+                var arg1 = oGlobals.ParseGlobalVars(args[1].ToString());
+                var arg2 = oGlobals.ParseGlobalVars(args[2].ToString());
+                var arg3 = oGlobals.ParseGlobalVars(args[3].ToString());
+                var arg4 = oGlobals.ParseGlobalVars(args[4].ToString());
+
+                EventConnect?.Invoke(arg1, arg2, arg3, arg4, isLich);
+            }
+            else if (args.Count == 2)
+            {
+                var arg1 = oGlobals.ParseGlobalVars(args[1].ToString());
+                var argEmpty = "";
+                EventConnect?.Invoke(arg1, argEmpty, argEmpty, argEmpty,isLich);
+            }
+            else
+            {
+                EchoText("Invalid number of arguments in #connect command. Syntax: #connect account password character game" + Constants.vbNewLine);
+            }
+
         }
 
         public string Eval(string sText)
@@ -2568,7 +2613,9 @@ namespace GenieClient.Genie
                     objFile.Close();
                 }
             }
+            #pragma warning disable CS0168
             catch (FileNotFoundException ex)
+            #pragma warning restore CS0168
             {
                 EchoText("Topic does not exist.");
             }
@@ -2794,10 +2841,10 @@ namespace GenieClient.Genie
         private void ListSubstitutes(string sPattern)
         {
             EchoText(Constants.vbNewLine + "Active substitutes: " + Constants.vbNewLine);
-            bool bUsePattern = false;
+            // bool bUsePattern = false;
             if (sPattern.Length > 0)
             {
-                bUsePattern = true;
+                // bUsePattern = true;
                 EchoText("Filter: " + sPattern + Constants.vbNewLine);
             }
 
@@ -2833,10 +2880,10 @@ namespace GenieClient.Genie
         private void ListGags(string sPattern)
         {
             EchoText(Constants.vbNewLine + "Active gags: " + Constants.vbNewLine);
-            bool bUsePattern = false;
+            // bool bUsePattern = false;
             if (sPattern.Length > 0)
             {
-                bUsePattern = true;
+                // bUsePattern = true;
                 EchoText("Filter: " + sPattern + Constants.vbNewLine);
             }
 

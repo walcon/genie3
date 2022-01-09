@@ -126,7 +126,7 @@ namespace GenieClient
         /* TODO ERROR: Skipped EndRegionDirectiveTrivia */
         /* TODO ERROR: Skipped EndRegionDirectiveTrivia */
         private Win32Utility Win32Utility = new Win32Utility();
-        private int m_iMaxScroll = int.MinValue;
+        // private int m_iMaxScroll = int.MinValue;
         private int m_iEndLine = int.MinValue;
         private FormSkin m_oParentForm;
         private RichTextBox m_oRichTextBuffer = new RichTextBox();
@@ -388,7 +388,7 @@ namespace GenieClient
 
             if (sText.Length > 0)
             {
-                m_oRichTextBuffer.SelectedText = sText;
+                m_oRichTextBuffer.SelectedText = sText; 
                 ParseLineHighlight(iStart, sText);
             }
         }
@@ -673,7 +673,10 @@ namespace GenieClient
 
             SelectionStart = int.MaxValue;
             SelectionLength = 0;
-            SelectedRtf = text;
+
+            if (text != "")
+                SelectedRtf = text;
+            
             bool bScroll = true;
             if (iFirstLineVisible + 2 >= m_iEndLine) // +2 extra lines
             {
@@ -776,7 +779,7 @@ namespace GenieClient
             m_bPendingNewLine = false;
         }
 
-        private void ComponentRichTextBox_GotFocus(object sender, EventArgs e)
+        public void ComponentRichTextBox_GotFocus(object sender, EventArgs e)
         {
             m_oParentForm.Focus();
         }
@@ -785,7 +788,7 @@ namespace GenieClient
 
         public delegate void EventKeyDownEventHandler(KeyEventArgs e);
 
-        private void ComponentRichTextBox_KeyDown(object sender, KeyEventArgs e)
+        public void ComponentRichTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(e.KeyData == Keys.PageUp | e.KeyData == Keys.PageDown))
             {
@@ -798,7 +801,7 @@ namespace GenieClient
 
         public delegate void EventKeyPressEventHandler(KeyPressEventArgs e);
 
-        private void ComponentRichTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        public void ComponentRichTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             EventKeyPress?.Invoke(e);
             e.Handled = true;
@@ -806,12 +809,12 @@ namespace GenieClient
 
         private bool m_bMouseDown = false;
 
-        private void ComponentRichTextBox_MouseDown(object sender, MouseEventArgs e)
+        public void ComponentRichTextBox_MouseDown(object sender, MouseEventArgs e)
         {
             m_bMouseDown = true;
         }
 
-        private void ComponentRichTextBox_MouseUp(object sender, MouseEventArgs e)
+        public void ComponentRichTextBox_MouseUp(object sender, MouseEventArgs e)
         {
             try
             {
@@ -828,7 +831,9 @@ namespace GenieClient
                     FlushBuffer();
                 }
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
             }
             // Ignore

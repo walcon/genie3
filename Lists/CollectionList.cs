@@ -17,7 +17,9 @@ namespace GenieClient.Genie.Collections
                 m_RWLock.AcquireWriterLock(millisecondsTimeout);
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -29,10 +31,15 @@ namespace GenieClient.Genie.Collections
             {
                 if (m_RWLock.IsWriterLockHeld)
                     return false;
+
+                if (m_RWLock.IsReaderLockHeld) return true;
+
                 m_RWLock.AcquireReaderLock(millisecondsTimeout);
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -46,7 +53,9 @@ namespace GenieClient.Genie.Collections
                     return default;
                 return m_RWLock.UpgradeToWriterLock(millisecondsTimeout);
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return default;
             }
@@ -59,7 +68,9 @@ namespace GenieClient.Genie.Collections
                 m_RWLock.DowngradeFromWriterLock(ref cookie);
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return default;
             }
@@ -72,7 +83,9 @@ namespace GenieClient.Genie.Collections
                 m_RWLock.ReleaseWriterLock();
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
@@ -85,7 +98,9 @@ namespace GenieClient.Genie.Collections
                 m_RWLock.ReleaseReaderLock();
                 return true;
             }
+            #pragma warning disable CS0168
             catch (Exception ex)
+            #pragma warning restore CS0168
             {
                 return false;
             }
