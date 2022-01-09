@@ -192,7 +192,7 @@ namespace GenieClient.Mapper
             {
                 m_RoomUpdated = true;
             }
-            else if ((var ?? "") == "prompt" & m_RoomUpdated == true) // Check for room change on prompt
+            else if ((var ?? "") == "prompt" && m_RoomUpdated == true) // Check for room change on prompt
             {
                 UpdateCurrentRoom();
             }
@@ -203,7 +203,7 @@ namespace GenieClient.Mapper
             else if ((var ?? "") == "roomexits")
             {
                 m_RisingMists = get_GlobalVariable(var).Contains("obscured by a thick fog");
-                if (m_RisingMists & m_DebugEnabled)
+                if (m_RisingMists && m_DebugEnabled)
                     EchoText("[" + Name + "] RisingMists = TRUE");
             }
         }
@@ -274,9 +274,9 @@ namespace GenieClient.Mapper
                     }
                 }
             }
-            #pragma warning disable CS0168
+#pragma warning disable CS0168
             catch (Exception ex)
-            #pragma warning restore CS0168
+#pragma warning restore CS0168
             {
                 EchoText("[" + Name + "] Invalid maps in genie map directory.");
             }
@@ -460,14 +460,14 @@ namespace GenieClient.Mapper
                 EchoText("[" + Name + "] Move = " + sMove);
 
             // Set position
-            if (m_Recording == true & !Information.IsNothing(m_LastNode))
+            if (m_Recording == true && !Information.IsNothing(m_LastNode))
             {
                 if (!Information.IsNothing(m_LastNode.Position))
                 {
                     if (Information.IsNothing(oNode.Position))
                     {
                         oNode.Position = new Point3D(m_LastNode.Position);
-                        if (oDirMove != Direction.None & oDirMove != Direction.Climb & oDirMove != Direction.Go)
+                        if (oDirMove != Direction.None && oDirMove != Direction.Climb && oDirMove != Direction.Go)
                         {
                             oNode.Position.Offset(oDirMove);
                         }
@@ -486,7 +486,7 @@ namespace GenieClient.Mapper
             int iFindCount = m_Nodes.FindCount(oNode);
             if (m_DebugEnabled == true)
                 EchoText("[" + Name + "] Find count = " + iFindCount.ToString());
-            if (bMapChanged == false & iFindCount == 0 & Information.IsNothing(m_LastNode) & m_Recording == false) // Locate room on disk and load map
+            if (bMapChanged == false && iFindCount == 0 && Information.IsNothing(m_LastNode) && m_Recording == false) // Locate room on disk and load map
             {
                 if (m_DebugEnabled == true)
                     EchoText("[" + Name + "] Checking Map On Disk");
@@ -575,7 +575,7 @@ namespace GenieClient.Mapper
                         }
                     }
 
-                    if (!Information.IsNothing(oMatchNode) & bMultiMatch == false)
+                    if (!Information.IsNothing(oMatchNode) && bMultiMatch == false)
                     {
                         oNode = oMatchNode;
                         if (m_DebugEnabled == true)
@@ -641,19 +641,19 @@ namespace GenieClient.Mapper
                         }
                     }
 
-                    if (m_Recording == true & iFindCount == 0)
+                    if (m_Recording == true && iFindCount == 0)
                     {
                         EchoText("[" + Name + "] Added new node #" + oNode.ID);
                         m_Nodes.Add(oNode);
                     }
-                    else if (bMultiMatch == false & m_AllowDuplicates == true)
+                    else if (bMultiMatch == false && m_AllowDuplicates == true)
                     {
                         EchoText("[" + Name + "] Added duplicate room #" + oNode.ID);
                         m_Nodes.Add(oNode);
                     }
                     else if (bMultiMatch == true)
                     {
-                        if (m_Recording == true & m_AllowDuplicates == true & oDirMove != Direction.Climb & oDirMove != Direction.Go & oDirMove != Direction.None & oDirMove != Direction.Out)
+                        if (m_Recording == true && m_AllowDuplicates == true && oDirMove != Direction.Climb && oDirMove != Direction.Go && oDirMove != Direction.None && oDirMove != Direction.Out)
                         {
                             EchoText("[" + Name + "] Added new multi match room #" + oNode.ID);
                             m_Nodes.Add(oNode);
@@ -683,7 +683,7 @@ namespace GenieClient.Mapper
                         if (m_DebugEnabled == true)
                             EchoText("[" + Name + "] Located link node to #" + oNode.ID);
                     }
-                    else if (m_Recording == true & m_AllowDuplicates == true & oDirMove != Direction.Climb & oDirMove != Direction.Go & oDirMove != Direction.None & oDirMove != Direction.Out)
+                    else if (m_Recording == true && m_AllowDuplicates == true && oDirMove != Direction.Climb && oDirMove != Direction.Go && oDirMove != Direction.None && oDirMove != Direction.Out)
                     {
                         EchoText("[" + Name + "] Added new multi match room #" + oNode.ID);
                         m_Nodes.Add(oNode);
@@ -713,7 +713,7 @@ namespace GenieClient.Mapper
                             if (m_Recording == true)
                                 EchoText(oArc.Direction.ToString() + ": <not set>");
                         }
-                        else if (oArc.Direction == Direction.Go | oArc.Direction == Direction.Climb)
+                        else if (oArc.Direction == Direction.Go || oArc.Direction == Direction.Climb)
                         {
                             sPortals += Interaction.IIf(sPortals.Length > 0, ", ", "") + oArc.Move;
                         }
@@ -723,7 +723,7 @@ namespace GenieClient.Mapper
                         }
                     }
 
-                    if (m_RisingMists & sDirections.Length > 0)
+                    if (m_RisingMists && sDirections.Length > 0)
                         EchoText("Mapped directions: " + sDirections, true);
                     if (sPortals.Length > 0)
                         EchoText("Mapped exits: " + sPortals, true);
@@ -731,7 +731,7 @@ namespace GenieClient.Mapper
                     if (m_Recording == true)
                     {
                         bool bExitAdded = false;
-                        if (oDirMove == Direction.Go | oDirMove == Direction.Climb)
+                        if (oDirMove == Direction.Go || oDirMove == Direction.Climb)
                         {
                             if (m_LastNode.Arcs.Contains(sMove) == false)
                             {
@@ -747,7 +747,7 @@ namespace GenieClient.Mapper
                             // Automatically set return in opposite direction on Duplicate mode TEMP TEMP TEMP TEMP
                             if (m_AllowDuplicates == true)
                             {
-                                if (!Information.IsNothing(oDirReverseMove) & !Information.IsNothing(m_LastNode))
+                                if (!Information.IsNothing(oDirReverseMove) && !Information.IsNothing(m_LastNode))
                                 {
                                     if (oNode.Arcs.Contains(oDirReverseMove))
                                     {
@@ -1061,7 +1061,7 @@ namespace GenieClient.Mapper
                                 }
                                 break;
                             }
-                            
+
                             // No file name specified, attempt to use current file name:
                             if (m_Form.SaveXML() == false)
                             {
@@ -1113,7 +1113,8 @@ namespace GenieClient.Mapper
 
                     case "snap":
                         {
-                            if (sArg.Length > 0) {
+                            if (sArg.Length > 0)
+                            {
                                 bool snapSetting = StringToBoolean(sArg);
                                 EchoText("[" + Name + "] Snap to grid - " + snapSetting, true);
                                 m_Form.SetSnapToggle(snapSetting);
@@ -1176,10 +1177,10 @@ namespace GenieClient.Mapper
                                 int iNodeID = 0;
                                 if (sArg.Length > 3)
                                 {
-                                // Other zone
-                                // - Find the destination map
-                                // - Find what path it needs to take trough the different zones
-                                // Integer.TryParse(sArg.Substring(0, 3), iNodeID)
+                                    // Other zone
+                                    // - Find the destination map
+                                    // - Find what path it needs to take trough the different zones
+                                    // Integer.TryParse(sArg.Substring(0, 3), iNodeID)
                                 }
                                 else
                                 {
@@ -1282,7 +1283,8 @@ namespace GenieClient.Mapper
                                 {
                                     m_Form.EraseRoom(m_LastNode);
                                     EchoText("[" + Name + "] Deleting current room (" + m_LastNode.ID + ")", true);
-                                } else
+                                }
+                                else
                                 {
                                     EchoText("[" + Name + "] Delete - can't delete, current room is unknown.", true);
                                 }
@@ -1304,7 +1306,8 @@ namespace GenieClient.Mapper
                                     {
                                         EchoText("[" + Name + "] Delete - could not locate room \"" + sArg + "\".", true);
                                     }
-                                } else
+                                }
+                                else
                                 {
                                     EchoText("[" + Name + "] Delete - invalid room specified \"" + sArg + "\"", true);
                                 }
@@ -1336,8 +1339,9 @@ namespace GenieClient.Mapper
                             if (!Information.IsNothing(m_LastNode))
                             {
                                 EchoText("[" + Name + "] Label added for current room: " + sArg, true);
-                                m_LastNode.Note = Conversions.ToString(Interaction.IIf(m_LastNode.Note.Length > 0, m_LastNode.Note + "|", "") + sArg);   
-                            } else
+                                m_LastNode.Note = Conversions.ToString(Interaction.IIf(m_LastNode.Note.Length > 0, m_LastNode.Note + "|", "") + sArg);
+                            }
+                            else
                             {
                                 EchoText("[" + Name + "] Current location unknown, cannot add note.", true);
                             }
@@ -1358,7 +1362,8 @@ namespace GenieClient.Mapper
                                         m_Form.UpdateGraph(m_LastNode, m_Nodes, m_eLastMovement);
                                     }
                                 }
-                            } else
+                            }
+                            else
                             {
                                 EchoText("[" + Name + "] Please specify a color (ex: green).", true);
                             }
@@ -1415,7 +1420,8 @@ namespace GenieClient.Mapper
                             {
                                 int.TryParse(sArg, out m_TimeOutMS);
                                 EchoText("[" + Name + "] Time out set to (milliseconds): " + m_TimeOutMS.ToString(), true);
-                            } else
+                            }
+                            else
                             {
                                 EchoText("[" + Name + "] Please specify timeout in milliseconds.", true);
                             }
@@ -1441,15 +1447,18 @@ namespace GenieClient.Mapper
                                         }
 
                                         m_LastNode = oNode;
-                                    } else
+                                    }
+                                    else
                                     {
                                         EchoText("[" + Name + "] Room id " + ID + " not found on this map.", true);
                                     }
-                                } else
+                                }
+                                else
                                 {
                                     EchoText("[" + Name + "] Invalid roomid specified - please enter a number.", true);
                                 }
-                            } else
+                            }
+                            else
                             {
                                 EchoText("[" + Name + "] Please specify a roomid.", true);
                             }
@@ -1760,7 +1769,7 @@ namespace GenieClient.Mapper
             if (Text.Length < 50 && Text.Contains(Constants.vbCr) == false)
             {
                 var argoDateEnd = DateTime.Now;
-                if (m_Movement.Count > 0 & Utility.GetTimeDiffInMilliseconds(m_LastInputTime, argoDateEnd) > m_TimeOutMS)
+                if (m_Movement.Count > 0 && Utility.GetTimeDiffInMilliseconds(m_LastInputTime, argoDateEnd) > m_TimeOutMS)
                 {
                     m_Movement.Clear();
                     if (m_DebugEnabled == true)
@@ -1780,7 +1789,7 @@ namespace GenieClient.Mapper
                     }
                 }
 
-                if (Text.ToLower().StartsWith("go ") | Text.ToLower().StartsWith("climb "))
+                if (Text.ToLower().StartsWith("go ") || Text.ToLower().StartsWith("climb "))
                 {
                     m_Movement.Add(Text);
                     if (m_DebugEnabled == true)
@@ -1962,7 +1971,7 @@ namespace GenieClient.Mapper
         private void GraphForm_ToggleRecord(bool toggle)
         {
             m_Recording = toggle;
-            if (toggle == true & m_Nodes.Count > 0)
+            if (toggle == true && m_Nodes.Count > 0)
             {
                 m_LastNode = null;
             }
@@ -1995,7 +2004,7 @@ namespace GenieClient.Mapper
         {
             if (AlwaysEcho == false && (Information.IsNothing(m_Form) || m_Form.Visible == false))
                 return;
-            EventEchoText?.Invoke(Text + Constants.vbNewLine, Color.Cyan, Color.Transparent);
+            EventEchoText?.Invoke(Text + System.Environment.NewLine, Color.Cyan, Color.Transparent);
         }
 
         public void SendText(string Text)
