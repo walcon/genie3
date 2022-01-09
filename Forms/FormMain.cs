@@ -1535,13 +1535,6 @@ namespace GenieClient
             AppendText("Using Encoding: " + Encoding.Default.EncodingName + Constants.vbNewLine);
             AppendText("Genie User Data Path: " + LocalDirectory.Path + Constants.vbNewLine + Constants.vbNewLine);
 
-            // AppendText(vbNewLine & _
-            // "THIS SOFTWARE AND THE ACCOMPANYING FILES ARE SENT ""AS IS"" AND WITHOUT WARRANTY AS TO PERFORMANCE OF MERCHANTABILITY OR ANY OTHER WARRANTIES WHETHER EXPRESSED OR IMPLIED." & vbNewLine & _
-            // "The software authors will not be held liable for any damage to your computer system, data files, gaming environment, or for any actions brought against you for using this software. The user must assume the entire risk of running this software." & vbNewLine & _
-            // "You may not redistribute this software in any way shape or form without the written permission from the author." & vbNewLine & _
-            // vbNewLine & _
-            // "BY USING THIS SOFTWARE YOU AGREE TO THE ABOVE STATED TERMS " & vbNewLine & vbNewLine)
-
             Application.DoEvents();
             AppendText("Loading Settings...");
             m_oGlobals.Config.Load(m_oGlobals.Config.ConfigDir + @"\settings.cfg");
@@ -4268,6 +4261,12 @@ namespace GenieClient
                     case Genie.Game.WindowTarget.Other:
                         {
                             oFormTarget = FindSkinFormByName(sTargetWindow);
+                            break;
+                        }
+
+                    case Genie.Game.WindowTarget.Combat:
+                        {
+                            oFormTarget = FindSkinFormByName("Combat");
                             break;
                         }
 
