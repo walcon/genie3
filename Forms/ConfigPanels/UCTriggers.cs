@@ -170,7 +170,7 @@ namespace GenieClient
                 string argsValue = ListViewBase.SelectedItems[0].SubItems[2].Text;
                 CheckBoxEval.Checked = Utility.StringToBoolean(argsValue);
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 if (ListViewBase.SelectedItems[0].SubItems[3].Text.Length > 0)
                 {
                     ComboBoxClass.Text = ListViewBase.SelectedItems[0].SubItems[3].Text;
@@ -191,7 +191,7 @@ namespace GenieClient
                 CheckBoxEval.Checked = false;
                 TextBoxAction.Enabled = true;
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 ToolStripButtonRemove.Enabled = true;
                 RemoveToolStripMenuItem.Enabled = true;
             }
@@ -326,7 +326,7 @@ namespace GenieClient
                 li.Selected = true;
                 ToolStripButtonRemove.Enabled = true;
                 RemoveToolStripMenuItem.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
             }
 
             return true;

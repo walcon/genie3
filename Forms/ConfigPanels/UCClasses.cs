@@ -122,7 +122,7 @@ namespace GenieClient
                 TextBoxAction.Enabled = true;
                 TextBoxAction.Text = ListViewBase.SelectedItems[0].SubItems[1].Text;
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 ToolStripButtonRemove.Enabled = true;
                 RemoveToolStripMenuItem.Enabled = true;
             }
@@ -132,7 +132,7 @@ namespace GenieClient
                 TextBoxClass.Text = "";
                 TextBoxAction.Enabled = true;
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 ToolStripButtonRemove.Enabled = true;
                 RemoveToolStripMenuItem.Enabled = true;
             }
@@ -230,7 +230,7 @@ namespace GenieClient
                 li.Selected = true;
                 ToolStripButtonRemove.Enabled = true;
                 RemoveToolStripMenuItem.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
             }
 
             return true;
