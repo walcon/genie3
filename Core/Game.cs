@@ -914,9 +914,9 @@ namespace GenieClient.Genie
             }
         }
 
-        private ArrayList _CharacterList = new ArrayList();
+        private Genie.Collections.ArrayList _CharacterList = new Genie.Collections.ArrayList();
 
-        public ArrayList CharacterList
+        public Genie.Collections.ArrayList CharacterList
         {
             get
             {
@@ -933,7 +933,7 @@ namespace GenieClient.Genie
             }
             else
             {
-                var oData = new ArrayList();
+                var oData = new Genie.Collections.ArrayList();
                 foreach (string strLine in sText.Split(Conversions.ToChar(Constants.vbTab)))
                     oData.Add(strLine);
                 if (oData.Count > 0)

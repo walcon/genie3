@@ -106,6 +106,9 @@ namespace GenieClient.Genie.Collections
         {
         }
 
+        public ArrayList(ICollection collection) : base((ICollection)collection)
+        {
+        }
         public new void Clear()
         {
             if (AcquireWriterLock(m_iDefaultTimeout))

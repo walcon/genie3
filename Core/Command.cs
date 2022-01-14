@@ -234,7 +234,7 @@ namespace GenieClient.Genie
                     if (sRow.Trim().StartsWith(Conversions.ToString(oGlobals.Config.cCommandChar)))
                     {
                         // Get result from function then send result to game
-                        var oArgs = new ArrayList();
+                        var oArgs = new Genie.Collections.ArrayList();
                         oArgs = Utility.ParseArgs(sRow);
                         if (oArgs.Count > 0)
                         {
@@ -2548,7 +2548,7 @@ namespace GenieClient.Genie
         private string ParseAlias(string sText)
         {
             string sResult = "";
-            var oArgs = new ArrayList();
+            var oArgs = new Genie.Collections.ArrayList();
             oArgs = Utility.ParseArgs(sText);
             string sKey = GetKeywordString(sText);
             if (oGlobals.AliasList.ContainsKey(sKey) == true)
@@ -2640,7 +2640,7 @@ namespace GenieClient.Genie
             SendText(sText, bUserInput, sOrigin);
         }
 
-        // Private Function ParseAllArgs(ByoList As ArrayList, Optional ByVal iStartIndex As Integer = 1) As String
+        // Private Function ParseAllArgs(ByoList As Genie.Collections.ArrayList, Optional ByVal iStartIndex As Integer = 1) As String
         // Dim sResult As String = String.Empty
 
         // For i As Integer = iStartIndex To oList.Count - 1
