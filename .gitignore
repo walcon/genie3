@@ -28,6 +28,9 @@ x86/
 bld/
 #[Bb]in/
 bin/Debug
+bin/
+obj/
+.vs/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
