@@ -359,7 +359,7 @@ namespace GenieClient
                 TextBoxColor.Text = ListViewBase.SelectedItems[0].SubItems[2].Text;
                 TextBoxColor.Tag = ListViewBase.SelectedItems[0].SubItems[2].Text;
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 LabelExampleColor.ForeColor = ListViewBase.SelectedItems[0].ForeColor;
                 LabelExampleColor.BackColor = ListViewBase.SelectedItems[0].BackColor;
                 RadioButtonString.Enabled = true;
@@ -418,7 +418,7 @@ namespace GenieClient
                 TextBoxHighlight.Text = "";
                 TextBoxColor.Enabled = true;
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 RadioButtonString.Enabled = false;
                 RadioButtonLine.Enabled = false;
                 RadioButtonBeginsWith.Enabled = false;
@@ -721,7 +721,7 @@ namespace GenieClient
                 li.Selected = true;
                 ToolStripButtonRemove.Enabled = true;
                 RemoveToolStripMenuItem.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
             }
 
             m_HighlightList.RebuildLineIndex();

@@ -241,7 +241,7 @@ namespace GenieClient
                 TextBoxColor.Text = ListViewBase.SelectedItems[0].SubItems[1].Text;
                 TextBoxColor.Tag = ListViewBase.SelectedItems[0].SubItems[1].Text;
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 LabelExampleColor.ForeColor = ListViewBase.SelectedItems[0].ForeColor;
                 LabelExampleColor.BackColor = ListViewBase.SelectedItems[0].BackColor;
             }
@@ -251,7 +251,7 @@ namespace GenieClient
                 TextBoxPreset.Text = "";
                 TextBoxColor.Enabled = true;
                 GroupBoxBase.Enabled = true;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
             }
             else
             {

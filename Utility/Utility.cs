@@ -240,8 +240,8 @@ namespace GenieClient
             return span.TotalMilliseconds;
         }
 
-        // Public Shared Function SafeSplit(BysInput As String, BycSplitChar As Char) As ArrayList
-        // Dim oList As New ArrayList()
+        // Public Shared Function SafeSplit(BysInput As String, BycSplitChar As Char) As Genie.Collections.ArrayList
+        // Dim oList As New Genie.Collections.ArrayList()
 
         // Dim bInsideString As Boolean = False
         // Dim cInsideStringChar As Char
@@ -314,9 +314,9 @@ namespace GenieClient
             return GenerateHashSHA512(argsText);
         }
 
-        public static ArrayList ParseArgs(string sText, bool bTreatUnderscoreAsSpace = false)
+        public static Genie.Collections.ArrayList ParseArgs(string sText, bool bTreatUnderscoreAsSpace = false)
         {
-            var oList = new ArrayList();
+            var oList = new Genie.Collections.ArrayList();
             try
             {
                 bool bInsideString = false;
@@ -679,9 +679,9 @@ namespace GenieClient
             return sReturnText.Trim();
         }
 
-        public static ArrayList SafeSplit(string sInput, char cSplitChar)
+        public static Genie.Collections.ArrayList SafeSplit(string sInput, char cSplitChar)
         {
-            var oList = new ArrayList();
+            var oList = new Genie.Collections.ArrayList();
             bool bInsideString = false;
             var cInsideStringChar = default(char);
             int iBracketDepth = 0;

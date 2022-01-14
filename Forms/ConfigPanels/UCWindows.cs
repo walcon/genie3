@@ -201,7 +201,7 @@ namespace GenieClient
                     CheckBoxTimeStamp.Checked = fo.TimeStamp;
                     CheckBoxNameListOnly.Checked = fo.NameListOnly;
                     GroupBoxBase.Enabled = true;
-                    GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                    GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                     ToolStripButtonRemove.Enabled = true;
                     RemoveToolStripMenuItem.Enabled = true;
                 }
@@ -215,7 +215,7 @@ namespace GenieClient
                 CheckBoxNameListOnly.Checked = false;
                 CheckBoxTimeStamp.Enabled = false;
                 CheckBoxNameListOnly.Enabled = false;
-                GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                 ToolStripButtonRemove.Enabled = true;
                 RemoveToolStripMenuItem.Enabled = true;
             }
@@ -339,7 +339,7 @@ namespace GenieClient
                     li.Selected = true;
                     ToolStripButtonRemove.Enabled = true;
                     RemoveToolStripMenuItem.Enabled = true;
-                    GroupBoxBase.Tag = new ArrayList(ListViewBase.SelectedItems);
+                    GroupBoxBase.Tag = new Genie.Collections.ArrayList(ListViewBase.SelectedItems);
                     m_FormMain.UpdateWindowMenuList();
                     fo.Visible = true;
                 }
