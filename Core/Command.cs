@@ -373,6 +373,7 @@ namespace GenieClient.Genie
 
                                     case "lc":
                                     case "lconnect":
+                                    case "lichconnect":
                                         {
                                             EchoText("Starting Lich Server\n");
                                             string lichLaunch = $"/C {oGlobals.Config.RubyPath} {oGlobals.Config.LichPath} {oGlobals.Config.LichArguments}";
